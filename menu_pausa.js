@@ -3,9 +3,8 @@ function resume_game(){
     this.Scene.resume();
 }
 
-/*
-Redirige al menú principal
 function salir(){
-	loadpage("./html/phasergame2.html");
+    loadpage("./Index_Menu.html");
 }
-*/
+
+
