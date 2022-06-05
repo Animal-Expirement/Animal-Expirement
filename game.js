@@ -23,16 +23,28 @@ export class Game extends Phaser.Scene {
       this.load.image('cientifico', 'images/cientifico.png');
       this.load.image('pocion', 'images/potiBuena.png');
       this.load.image('pocion2', 'images/potiBuena.png');
+
+      
+      
       
     }
-
-  
+    
+    
     create() {
+      
+      
+
       this.cameras.main.setBounds(0,0, 2560, 720);
       this.physics.world.setBounds(0, 0, 2560, 720)
 
 
       this.add.image(1280, 360, 'background');
+      
+      const pauseButton = this.add.text(100, 100, 'PAUSA', { fill: '#0f0' });
+      pauseButton.setInteractive()
+      .on('pointerdown', () => this.pausarjuego());
+
+    
 
 
       this.gameoverImage = this.add.image(400, 90, 'gameover');
@@ -90,6 +102,9 @@ export class Game extends Phaser.Scene {
       
         
     }
+    pausarjuego(){
+      loadpage("./menu_pausa.html");
+    }
 
     
     update(){
@@ -100,6 +115,7 @@ export class Game extends Phaser.Scene {
 
       this.physics.moveToObject(this.cientifico, this.player, 180);
       this.add.text(1000, 300, "AQUI DEBERÍA IR EL TIEMPO");
+      
       
       if(this.cursors.left.isDown){
         this.player.setVelocityX(-500, 0)
@@ -119,7 +135,10 @@ export class Game extends Phaser.Scene {
       else {
         this.player.setVelocityY(0)
       }
+
+  
     }
+    
 }
 
 function recibirDaño(daño)
@@ -147,5 +166,12 @@ function recoger(object){
       this.Scene.stop();
   }
 }
+function pausarjuego(){
+  loadpage()
+}
+
+
+
+
 
 
