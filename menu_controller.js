@@ -1,11 +1,13 @@
 function phaser_game(){
+    
     name = prompt("User name");
 	
 	sessionStorage.setItem("username", name);
-	loadpage("/index.html");
+    loadpage("/index.html");
+	
 }
 function puntuaciones(){
-	loadpage("./html/puntuacions.html");
+	loadpage("");
 }
 
 function exit (){
@@ -16,7 +18,7 @@ function exit (){
 }
 
 function options(){
-	loadpage("./html/options.html");
+	loadpage("/option.html");
 }
 
 function load(){
