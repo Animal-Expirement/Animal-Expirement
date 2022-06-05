@@ -1,9 +1,9 @@
 function phaser_game(){
     
-    name = prompt("User name");
+    /*name = prompt("User name");
 	
-	sessionStorage.setItem("username", name);
-    loadpage("./html/index.html");
+	sessionStorage.setItem("username", name);*/
+    loadpage("./index.html");
 	
 }
 function puntuaciones(){
