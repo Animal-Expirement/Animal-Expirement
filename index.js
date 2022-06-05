@@ -1,8 +1,15 @@
 //importamos el archivo del juego
 import { Game } from './game.js';
 
+let pociones = 0;
+
 const config = {
     //canvas o webgl
+
+
+  //var w : 2560;
+  //var h = 640;
+
   type: Phaser.AUTO,
   width: 1280,
   height: 720,
