@@ -1,5 +1,6 @@
 function resume_game(){
 	loadpage("./index.html");
+    this.Scene.resume();
 }
 
 /*

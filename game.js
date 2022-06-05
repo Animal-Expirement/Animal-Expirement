@@ -153,15 +153,16 @@ export class Game extends Phaser.Scene {
 function recibirDaño(daño){
   
   jugador.genetica-=daño;
- 
 
   if(jugador.genetica<=0){
     //aqui deberias vovler a la posicion inicial, perdiendo una vida y rellenando la barra de genetica
     jugador.genetica=100;
     jugador.vidas--;
     if(jugador.vidas<=0){
-      //alert("perdiste mamahuevo");
-      this.Scene.stop();
+      
+      alert("perdiste mamahuevo");
+      //this.Scene.stop();
+      
     }
   }
  // console.log(jugador.vidas + " " + jugador.genetica);
