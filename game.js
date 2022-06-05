@@ -23,6 +23,7 @@ export class Game extends Phaser.Scene {
       this.load.image('cientifico', 'images/cientifico.png');
       this.load.image('pocion', 'images/potiBuena.png');
       this.load.image('pocion2', 'images/potiBuena.png');
+      this.load.image('conejo_vidas', 'images/conejo_vidas.png');
 
       
       
@@ -40,9 +41,13 @@ export class Game extends Phaser.Scene {
 
       this.add.image(1280, 360, 'background');
       
-      const pauseButton = this.add.text(100, 100, 'PAUSA', { fill: '#0f0' });
+      
+      const pauseButton = this.add.text(100, 600, 'PAUSA', { fill: '#f0f' });
+      pauseButton.style.fontSize = "50px";
+      pauseButton.setScrollFactor(0,0);
       pauseButton.setInteractive()
       .on('pointerdown', () => this.pausarjuego());
+      
 
     
 
@@ -63,6 +68,15 @@ export class Game extends Phaser.Scene {
       this.cientifico.setCollideWorldBounds(true);
       this.cientifico.setScale(0.3)
 
+      this.vidas = this.add.image(90, 100, 'conejo_vidas');
+      this.vidas.scale = 0.5;
+      this.vidas.setScrollFactor(0,0);
+      this.vidas = this.add.image(170, 100, 'conejo_vidas');
+      this.vidas.scale = 0.5;
+      this.vidas.setScrollFactor(0,0);
+      this.vidas = this.add.image(250, 100, 'conejo_vidas');
+      this.vidas.scale = 0.5;
+      this.vidas.setScrollFactor(0,0);
      
 
       
@@ -141,8 +155,7 @@ export class Game extends Phaser.Scene {
     
 }
 
-function recibirDaño(daño)
-{
+function recibirDaño(daño){
   jugador.genetica-=daño;
   if(jugador.genetica<=0){
     //aqui deberias vovler a la posicion inicial, perdiendo una vida y rellenando la barra de genetica
