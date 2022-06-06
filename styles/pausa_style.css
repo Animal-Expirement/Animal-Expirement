@@ -8,7 +8,9 @@ body{
 	 text-align: center;
 	 
 }
-
+p{
+	size: 50px;
+}
 
 .menu-object{
 	display:block;
