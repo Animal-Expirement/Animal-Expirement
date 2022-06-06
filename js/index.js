@@ -11,8 +11,8 @@ const config = {
   //var h = 640;
 
   type: Phaser.AUTO,
-  width: 1080,
-  height: 720,
+  width: 1920,
+  height: 1080,
   scene: [Game],
   //definicion del sistema de fisicas
   physics: {
