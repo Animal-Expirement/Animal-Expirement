@@ -23,16 +23,33 @@ export class Game extends Phaser.Scene {
       this.load.image('cientifico', 'images/cientifico.png');
       this.load.image('pocion', 'images/potiBuena.png');
       this.load.image('pocion2', 'images/potiBuena.png');
+      this.load.image('conejo_vidas', 'images/conejo_vidas.png');
+
+      
+      
       
     }
-
-  
+    
+    
     create() {
+      
+      
+
       this.cameras.main.setBounds(0,0, 2560, 720);
       this.physics.world.setBounds(0, 0, 2560, 720)
 
 
       this.add.image(1280, 360, 'background');
+      
+      
+      const pauseButton = this.add.text(100, 600, 'PAUSA', { fill: '#f0f' });
+      pauseButton.style.fontSize = "50px";
+      pauseButton.setScrollFactor(0,0);
+      pauseButton.setInteractive()
+      .on('pointerdown', () => this.pausarjuego());
+      
+
+    
 
 
       this.gameoverImage = this.add.image(400, 90, 'gameover');
@@ -51,6 +68,11 @@ export class Game extends Phaser.Scene {
       this.cientifico.setCollideWorldBounds(true);
       this.cientifico.setScale(0.3)
 
+      this.vidas = this.add.image(90, 100, 'conejo_vidas');
+      this.vidas.scale = 0.5;
+      this.vidas.setScrollFactor(0,0);
+      this.numvidas = this.add.text (150, 100, 3,  {fill: '#0f0' });
+      this.numvidas.setScrollFactor(0,0);
      
 
       
@@ -90,6 +112,9 @@ export class Game extends Phaser.Scene {
       
         
     }
+    pausarjuego(){
+      loadpage("./menu_pausa.html");
+    }
 
     
     update(){
@@ -119,22 +144,28 @@ export class Game extends Phaser.Scene {
       else {
         this.player.setVelocityY(0)
       }
+
+  
     }
+    
 }
 
-function recibirDaño(daño)
-{
+function recibirDaño(daño){
+  
   jugador.genetica-=daño;
+
   if(jugador.genetica<=0){
     //aqui deberias vovler a la posicion inicial, perdiendo una vida y rellenando la barra de genetica
     jugador.genetica=100;
     jugador.vidas--;
     if(jugador.vidas<=0){
+      
       alert("perdiste mamahuevo");
-      this.Scene.stop();
+      //this.Scene.stop();
+      
     }
   }
-  console.log(jugador.vidas + " " + jugador.genetica);
+ // console.log(jugador.vidas + " " + jugador.genetica);
 }
 
 function recoger(object){
@@ -142,10 +173,14 @@ function recoger(object){
   console.log(jugador.pociones);
   object.destroy();
   if(jugador.pociones>=2){
-    console.log(jugador.pociones);
-    alert("ganaste mamahuevo");
-      this.Scene.stop();
+    loadpage("./index2.html");
+      //this.Scene.stop();
   }
 }
+
+
+
+
+
 
 
