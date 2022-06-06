@@ -1,0 +1,34 @@
+body{
+	background: url(../images/background1.png) no-repeat center center fixed;
+}
+#title{
+	font-family: Impact, 'Arial Narrow Bold', sans-serif;
+     font-size: 100px;
+	 color:aliceblue;
+	 text-align: center;
+	 
+}
+
+
+.menu-object{
+	display:block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 250px;
+	height: 100px;
+	font-size: 16px;
+	margin-top: 100px;
+	
+}
+
+button.menu-object:active{
+	font-size: 18px;
+	width: 275px;
+	height: 70px;
+}
+
+button.menu-object:hover:not(:active){
+	font-size: 22px;
+	width: 325px;
+	height: 85px;
+}
