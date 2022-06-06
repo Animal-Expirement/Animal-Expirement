@@ -174,7 +174,7 @@ function recoger(object){
   object.destroy();
   if(jugador.pociones>=2){
     loadpage("./index2.html");
-      //this.Scene.stop();
+      this.Scene.stop();
   }
 }
 
