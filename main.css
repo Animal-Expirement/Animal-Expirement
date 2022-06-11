@@ -162,13 +162,6 @@ canvas {
     margin: auto;
 }
 
-
-button.menu-object-other:active{
-	font-size: 18px;
-	width: 275px;
-	height: 70px;
-}
-
 input[type=image]{
 	margin-left: -20px;
     margin-top: -5px;
