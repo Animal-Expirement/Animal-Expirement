@@ -136,9 +136,9 @@ p{
 button.menu-object:active{
 	font-size: 18px;
 	width: 50%;
-	height: 200%;
-    margin-right: 0px;
-    margin-left: 0px;
+	height: 350%;
+    	margin-right: 0px;
+    	margin-left: 0px;
 	
 }
 
@@ -146,8 +146,8 @@ button.menu-object:hover:not(:active){
 	font-size: 20px;
 	width: 50%;
 	height: 400%;
-    margin-top: auto;
-    margin-bottom: auto;
+    	margin-top: auto;
+    	margin-bottom: auto;
     
 }
 body{
@@ -163,7 +163,7 @@ canvas {
 }
 
 
-button.menu-object:active{
+button.menu-object-other:active{
 	font-size: 18px;
 	width: 275px;
 	height: 70px;
