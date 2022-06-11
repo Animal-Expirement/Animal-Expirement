@@ -145,7 +145,7 @@ button.menu-object:active{
 button.menu-object:hover:not(:active){
 	font-size: 20px;
 	width: 50%;
-	height: 500%;
+	height: 400%;
     margin-top: auto;
     margin-bottom: auto;
     
