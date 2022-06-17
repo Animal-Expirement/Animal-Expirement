@@ -55,8 +55,9 @@ input[type=image]{
 	width: 300px;
 	height: 100px;
 	font-size: 16px;
-	margin-top: 10px;
-    margin-bottom: 0px;
+	margin-top: 5px;
+    margin-bottom: 10px;
+    margin-left: 250px;
 }
 .menu-object button:nth-of-type(1) {
     background-image : url(images/9.png);
