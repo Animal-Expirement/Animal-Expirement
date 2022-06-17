@@ -1,0 +1,33 @@
+#title{
+	font-size: 30px;
+	line-height: 30px;
+    margin-left: 300px;
+	color : black;
+    font-family:'Bauhaus 93';
+    font-style: initial;
+    
+}
+.menu-word{
+    font-size: 15px;
+	line-height: 30px;
+    font-style: normal;
+	color :black;
+    margin-left: 5px;
+    margin-top: 10px;
+    
+}
+.menu-boton{
+    width: 50%;
+    height: 100%;
+    margin-bottom: 10%;
+    margin-right: 25%;
+    margin-left: 40%;
+}
+.menu-botones{
+    width: 50%;
+    height: 120%;
+    margin-bottom: 10%;
+    margin-right: 25%;
+    margin-left: 20%;
+    margin-top: -2%;
+}

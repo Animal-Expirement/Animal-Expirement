@@ -17,16 +17,13 @@ var options = function(){
 			dificulty: "normal"
 		},
 		created: function(){
-			this.num = options_data.cards;
 			this.dificulty = options_data.dificulty;
 		},
 		methods: { 
 			discard: function(){
-				this.num = options_data.cards;
 				this.dificulty = options_data.dificulty;
 			},
 			save: function(){
-				options_data.cards = this.num;
 				options_data.dificulty = this.dificulty;
 				save();
 				loadpage("../");
