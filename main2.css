@@ -1,0 +1,71 @@
+#title{
+	font-size: 30px;
+	line-height: 30px;
+    margin-left: 300px;
+	color : black;
+    font-family:'Bauhaus 93';
+    font-style: initial;
+    margin-left: 700px;
+    
+}
+.menu-word{
+    font-size: 15px;
+	line-height: 30px;
+    font-style: normal;
+	color :black;
+    margin-left: 5px;
+    margin-top: 10px;
+    
+}
+.menu-boton{
+    width: 50%;
+    height: 100%;
+    margin-bottom: 10%;
+    margin-right: 25%;
+    margin-left: 40%;
+}
+.menu-botones{
+    display:block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 300px;
+	height: 100px;
+	font-size: 16px;
+	margin-top: -500px;
+    margin-bottom: 10px;
+    margin-left: 600px;
+}
+
+button.menu-botones:active{
+	font-size: 18px;
+	width: 275px;
+	height: 70px;
+    	
+	
+}
+
+button.menu-botones:hover:not(:active){
+	font-size: 22px;
+	width: 325px;
+	height: 105px;
+  
+}
+body{
+	background: #663366;
+    display: grid; 
+	grid-gap : 1 em;
+	min-height: 60vh;
+	
+	
+	
+}
+canvas {
+    display: block;
+    margin: auto;
+}
+
+button.menu-object:active{
+	font-size: 18px;
+	width: 275px;
+	height: 70px;
+}
