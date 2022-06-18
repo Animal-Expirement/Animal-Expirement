@@ -3,9 +3,9 @@ class GameScene extends Phaser.Scene {
     //inicializacion de la clase
     constructor() {
       super('GameScene');
-      this.vidas = 3;
-      this.genetica = 100;
-      this.pociones = 0;
+        this.vidas = 3;
+        this.genetica = 100;
+        this.pociones = 0;
     }
   
 
