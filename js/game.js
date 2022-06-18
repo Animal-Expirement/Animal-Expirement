@@ -1,17 +1,11 @@
-//desde este modulo exporto a este mismo
-
-
-let jugador = {
-  vidas : 3,
-  genetica  : 100,
-  pociones : 0,
-};
-
-export class Game extends Phaser.Scene {
+class GameScene extends Phaser.Scene {
 
     //inicializacion de la clase
     constructor() {
-      super({ key: 'game' });
+      super('GameScene');
+      this.vidas = 3;
+      this.genetica = 100;
+      this.pociones = 0;
     }
   
 
