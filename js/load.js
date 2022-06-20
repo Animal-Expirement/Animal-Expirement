@@ -15,7 +15,7 @@ var load_obj = function(){
 		methods: { 
 			load: function(i){
 				sessionStorage.idPartida = i;
-				loadpage("/index.html");
+				loadpage("../html/phaser.html");
 			}
 		}
 	});

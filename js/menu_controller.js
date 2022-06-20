@@ -1,13 +1,17 @@
+function loadpage(url){
+	window.location.assign(url);
+}
+
 function phaser_game(){
     
-    /*name = prompt("User name");
+    name = prompt("User name");
 	
-	sessionStorage.setItem("username", name);*/
-    loadpage("../html/phaser.html");
+	sessionStorage.setItem("username", name);
+    loadpage("../html/phasergame.html");
 	
 }
 function puntuaciones(){
-	loadpage("");
+	loadpage("../html/puntuacions.html");
 }
 
 function exit (){
@@ -19,9 +23,9 @@ function exit (){
 }
 
 function options(){
-	loadpage("./html/option.html");
+	loadpage("../html/option.html");
 }
 
 function load(){
-	loadpage("./html/load.html");
+	loadpage("../html/load.html");
 }

@@ -126,6 +126,7 @@ function recibirDaño(daño)
     if(jugador.vidas<=0){
       alert("perdiste mamahuevo");
       this.Scene.stop();
+      
     }
   }
   console.log(jugador.vidas + " " + jugador.genetica);
@@ -140,6 +141,8 @@ function recoger(object){
     alert("ganaste mamahuevo");
       this.Scene.stop();
   }
+
+
 }
 
 

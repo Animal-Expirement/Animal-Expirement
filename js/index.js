@@ -1,19 +1,29 @@
-var config = {
-  type: Phaser.AUTO,
-  width: 1280,
-  height: 720,
-  parent: 'game_area',
-  //definicion del sistema de fisicas
-  physics: {
-    default: 'arcade',
-    arcade: {
-      gravity: { y: 400 },
-      debug: false
-    }
-  },
-  scene: [ GameScene ]
 
-};
+function phaser_game(){
+	loadpage("./html/phasergame.html");
+}
+function phaser_game2(){
+	loadpage("./html/phasergame2.html");
+}
+function phaser_game3(){
+	loadpage("./html/phasergame3.html");
+}
+function puntuaciones(){
+	loadpage("./html/puntuacions.html");
+}
 
-var game = new Phaser.Game(config);
+function exit (){
+	if (name != ""){
+		alert("Leaving " + name + "'s game");
+	}
+	name = "";
+}
+
+function options(){
+	loadpage("./html/options.html");
+}
+
+function load(){
+	loadpage("./html/load.html");
+}
 
