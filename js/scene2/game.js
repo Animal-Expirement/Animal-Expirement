@@ -2,6 +2,7 @@ let jugador = {
 	vidas : 3,
 	genetica  : 100,
 	pociones : 0,
+	vel : 200
   };
 
 let enemigo = {
@@ -13,12 +14,19 @@ let initialPosition = {
 	y : 360 ,
 };
 
-var timeText;
+let timeText;
 let numvidas
 let enemies
 
-let bullets 
+let bullets
+let firingTimer = 0;
+let firingDelay = 1500;
+
 let bulletsEnemy
+let firingEnemyTimer = 0
+let firingEnemyDelay = 4600;
+
+let aliveEnemies = []
 
 
 
@@ -57,19 +65,18 @@ class Game extends Phaser.Scene {
 		
 
 
-		this.cameras.main.setBounds(0,0, 2560, 720);
-		this.physics.world.setBounds(0, 0, 2560, 720)
+
+		this.physics.world.setBounds(0, 0, 1920, 1080)
 
   
   
 		this.player = this.physics.add.image(0, 600, 'player');
 		//this.player.setPosition(initialPosition.x, initialPosition.y)
 		this.player.body.allowGravity = false;
-		this.player.setBounce(0.5);
+		this.player.setScale(0.5);
 		this.player.setCollideWorldBounds(true);
+		this.player.body.immovable = true
 
-  
-		this.cameras.main.startFollow(this.player);
   
 		this.cursors = this.input.keyboard.createCursorKeys();	
 		
@@ -88,12 +95,19 @@ class Game extends Phaser.Scene {
 
 		
 		bullets = this.physics.add.group();
-		this.physics.add.collider(bullets, enemies, function(obj1, obj2){
-			obj1.destroy();
-			obj2.destroy();
-		});
-	
 		bulletsEnemy = this.physics.add.group();
+
+		this.physics.add.collider(bullets, enemies, function(obj1, obj2){
+			destroyEnemy(obj1, obj2);
+		});
+
+		this.physics.add.collider(bulletsEnemy, this.player, function(obj1, obj2){
+			
+			takeDmg(obj1, obj2);
+		});
+
+	
+		
 	}
 	
 	update(time){
@@ -103,20 +117,27 @@ class Game extends Phaser.Scene {
 		//this.numvidas = this.add.text (150, 100, jugador.genetica,  {fill: '#0f0' });
 
 		if(this.cursors.left.isDown){
-			this.player.setVelocityX(-150, 0)
+			this.player.setVelocityX(-jugador.vel, 0)
 		  }
 		  else if(this.cursors.right.isDown){
-			this.player.setVelocity(150, 0)
+			this.player.setVelocity(jugador.vel, 0)
 		  }
 		  else {
 			this.player.setVelocityX(0)
 		  }
 	
 		  if (Phaser.Input.Keyboard.JustDown(this.spacebar)){
-	
-			disparar(this.player.x, this.player.y);
+			disparar(this.player.x, this.player.y, time);
 		}
-		  
+
+
+
+		//enemigo random dispara
+		if(time > firingEnemyTimer){
+			dispararEnemigo();
+			firingEnemyTimer = time + firingEnemyDelay;
+		}  
+
 
 		timeText.setText('Time: ' + (time*0.001).toFixed(2));
 
@@ -133,6 +154,7 @@ function createEnemy () {
             var enemy = enemies.create(75 + x * 150, 75 + y * 75, 'cientifico');
 			enemy.body.allowGravity = false;
 			enemy.setScale(0.35);
+			aliveEnemies.push(enemy);
 			//enemy.physics.add.collider(enemy,this.player);
             //enemy.setCollideWorldBounds(true);
             //enemy.body.moves = false;
@@ -141,16 +163,54 @@ function createEnemy () {
 }
 
 
-function disparar(x, y){
-	var bullet = bullets.create(x, y, 'queso');
-	bullet.body.allowGravity=false;
-	bullet.setScale(0.25);
-	bullet.setVelocityY(-150)
+function disparar(x, y, time){
+	if(time > firingTimer){
+		var bullet = bullets.create(x, y, 'queso');
+		bullet.body.allowGravity=false;
+		bullet.setScale(0.2);
+		bullet.setVelocityY(-150)
+		firingTimer = time + firingDelay;
+	}
  }
 
- function dispararEnemigo(x, y){
-	var bulletEnemy = bulletsEnemy.create(x, y, 'quesoMalo');
+ function dispararEnemigo(){
+	var x = aliveEnemies.length;
+	var random = Math.floor(Math.random() * x);
+	
+	var shooter = aliveEnemies[random];
+
+	//shooter.destroy();
+	//aliveEnemies.splice(random,1);
+
+
+	//var shooter = aliveEnemies[random];
+
+	// /shooter.destroy();
+
+	var bulletEnemy = bulletsEnemy.create(shooter.x, shooter.y, 'quesoMalo');
 	bulletEnemy.body.allowGravity=false;
 	bulletEnemy.setScale(0.25);
 	bulletEnemy.setVelocityY(150)
  }
+
+ function destroyEnemy(obj1, obj2){
+	var index = aliveEnemies.indexOf(obj1);
+	aliveEnemies.splice(index,1);
+	obj1.destroy();
+	obj2.destroy();
+	firingEnemyDelay-=75;
+	if(aliveEnemies.length<=0){
+		loadpage("../html/phasergame.html")
+	}
+
+ }
+
+function takeDmg(obj1, obj2){
+	obj2.destroy();
+	jugador.vidas-=1;
+	numvidas.setText(jugador.vidas);
+	if(jugador.vidas<=0){
+		alert("GAME OVER")
+		this.Scene.stop();
+	  }
+}
