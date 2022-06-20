@@ -2,28 +2,31 @@ let jugador = {
 	vidas : 3,
 	genetica  : 100,
 	pociones : 0,
+	initialPositionx : 400,
+	initialPositiony : 360,
   };
 
 let enemigo = {
-	dmg : 10
+	dmg : 10,
+	vel : 65,
+	initialPositionx : 1280,
+	initialPositiony : 360,
 };
 
-let initialPosition = {
-	x : 400 ,
-	y : 360 ,
-};
 
 var timeText;
 let numvidas
 let numGenetica
 let numPotis
 
+let potis
+
+let width = 2560
+let height = 720
+
 
 
 class Game extends Phaser.Scene {
-
-	
-
     constructor (){
         super('GameScene');
 		
@@ -53,9 +56,9 @@ class Game extends Phaser.Scene {
 		numGenetica = this.add.text (150, 200, jugador.genetica,  {fill: '#0f0' });
 		numGenetica.setScrollFactor(0,0);
 
-		var potis = this.add.image(90, 300, 'pocionBuena');		
-		potis.scale = 0.15;
-		potis.setScrollFactor(0,0);
+		var potisHud = this.add.image(90, 300, 'pocionBuena');		
+		potisHud.scale = 0.15;
+		potisHud.setScrollFactor(0,0);
 		numPotis = this.add.text (150, 300, jugador.pociones,  {fill: '#0f0' });
 		numPotis.setScrollFactor(0,0);
 
@@ -69,48 +72,32 @@ class Game extends Phaser.Scene {
   
   
 		this.player = this.physics.add.image(0, 0, 'player');
-		this.player.setPosition(initialPosition.x, initialPosition.y)
+		this.player.setPosition(jugador.initialPositionx, jugador.initialPositiony)
 		this.player.body.allowGravity = false;
 		this.player.setBounce(0.5);
 		  this.player.setCollideWorldBounds(true);
 		this.player.setScale(0.5);
   
   
-		this.cientifico = this.physics.add.image(1280, 360, 'cientifico').setImmovable();
+		this.cientifico = this.physics.add.image(enemigo.initialPositionx, enemigo.initialPositiony, 'cientifico').setImmovable();
 		this.cientifico.body.allowGravity = false;
 		this.cientifico.setCollideWorldBounds(true);
 		this.cientifico.setScale(0.3)
   
 	   
   
-		
-		let x = Math.random()*2560;
-		let y = Math.random()*720;
-		this.pocion = this.physics.add.image(x, y, 'pocionBuena');
-		this.pocion.body.allowGravity = false;
-		this.pocion.setScale(0.3);
-		x = Math.random()*2560;
-		y = Math.random()*720;
-		this.pocion2 = this.physics.add.image(x, y, 'pocionBuena');
-		this.pocion2.body.allowGravity = false;
-		this.pocion2.setScale(0.3);
-		
-  
+		potis = this.physics.add.group();
+		spawnPoti();
+		this.physics.add.collider(this.player, potis, function(player, potion){
+			recoger(potion);
+		});
   
 		this.physics.world.enableBody(this.cientifico);
   
 
-  
-		this.physics.add.collider(this.player, this.pocion, function(player, pocion){
-			recoger(pocion);
-		});
-  
-		this.physics.add.collider(this.player, this.pocion2, function(player, pocion2){
-			recoger(pocion2);
-		});
 
 		this.physics.add.collider(this.player, this.cientifico, function(player, cientifico){
-			recibirDano(enemigo.dmg, player);
+			recibirDano(enemigo.dmg, player, cientifico);
 		});
 
 
@@ -131,7 +118,7 @@ class Game extends Phaser.Scene {
   
 		//this.cientifico.body.onCollide = saoko();
   
-		this.physics.moveToObject(this.cientifico, this.player, 180);
+		this.physics.moveToObject(this.cientifico, this.player, enemigo.vel);
 
 
 		//this.numvidas = this.add.text (150, 100, jugador.genetica,  {fill: '#0f0' });
@@ -172,23 +159,28 @@ function recoger(object){
 	jugador.pociones++;
 	numPotis.setText(jugador.pociones);
 	object.destroy();
-	if(jugador.pociones>=2){
-	  	alert("ganaste mamahuevo");
+	if(jugador.pociones>=10){
+	  	loadpage("../html/phasergame2.html")
 		this.Scene.stop();
+	}
+	else{
+		enemigo.vel*=1.25
+		spawnPoti()
 	}
   }
 
 
-function recibirDano(x, player){
+function recibirDano(x, player, cientifico){
 
 	jugador.genetica -= x;
-	player.setPosition(player.x-35, player.y);
+	player.setPosition(player.x + 35*(player.x - cientifico.x)/Math.abs(player.x - cientifico.x), player.y);
 
 	numGenetica.setText(jugador.genetica);
 	
 	if(jugador.genetica<=0){
 	  //aqui deberias vovler a la posicion inicial, perdiendo una vida y rellenando la barra de genetica
-	  player.setPosition(initialPosition.x, initialPosition.y) 
+	  player.setPosition(jugador.initialPositionx, jugador.initialPositiony) 
+	  cientifico.setPosition(enemigo.initialPositionx, enemigo.initialPositiony)
 	  jugador.genetica=100;
 	  jugador.vidas--;
 	  numvidas.setText(jugador.vidas);
@@ -202,3 +194,15 @@ function recibirDano(x, player){
 		this.Scene.stop();
 	  }
 }
+
+
+function spawnPoti(){
+	var x = Math.random()*width
+	var y = Math.random()*height;
+	var poti = potis.create(x, y, 'pocionBuena');
+	poti.setScale(0.25);
+	poti.body.allowGravity = false;
+}
+
+
+
