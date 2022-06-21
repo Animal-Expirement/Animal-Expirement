@@ -24,6 +24,8 @@ let potis
 let width = 2560
 let height = 720
 
+let P
+let pause = false
 
 
 class Game extends Phaser.Scene {
@@ -47,25 +49,24 @@ class Game extends Phaser.Scene {
 		this.scene.launch('HUD');
 		this.add.image(1280, 360, 'background');
 
-		this.add.image(1280, 360, 'background');
+
 
 		this.vidas = this.add.image(90, 100, 'conejo_vidas');
 		this.vidas.scale = 0.5;
       	this.vidas.setScrollFactor(0,0);
-		numvidas = this.add.text (150, 100, jugador.vidas,  {fill: '#0f0' });
-		numvidas.setScrollFactor(0,0);
+
 
 		var genetica = this.add.image(90, 200, 'pocionMala');
 		genetica.scale = 0.15;
 		genetica.setScrollFactor(0,0);
-		numGenetica = this.add.text (150, 200, jugador.genetica,  {fill: '#0f0' });
-		numGenetica.setScrollFactor(0,0);
+
+
+
 
 		var potisHud = this.add.image(90, 300, 'pocionBuena');		
 		potisHud.scale = 0.15;
 		potisHud.setScrollFactor(0,0);
-		numPotis = this.add.text (150, 300, jugador.pociones,  {fill: '#0f0' });
-		numPotis.setScrollFactor(0,0);
+
 
 		this.cameras.main.setBounds(0,0, 2560, 720);
 		this.physics.world.setBounds(0, 0, 2560, 720)
@@ -106,6 +107,8 @@ class Game extends Phaser.Scene {
 		//timer = game.time.create(true);
 		timeText = this.add.text(100, 400);
 		timeText.setScrollFactor(0,0);
+
+		P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 	  }
 	
 	update(time){
@@ -141,6 +144,14 @@ class Game extends Phaser.Scene {
 
 		timeText.setText('Time: ' + (time*0.001).toFixed(2));
 
+		if (P.isDown){
+			if (P.isDown){
+				this.scene.pause();
+				this.scene.launch('Pause');
+				
+			}
+		}
+
 	}
 
 	
@@ -153,7 +164,7 @@ class Game extends Phaser.Scene {
 function recoger(object){
 
 	jugador.pociones++;
-	numPotis.setText(jugador.pociones);
+	
 	object.destroy();
 	if(jugador.pociones>=10){
 	  	loadpage("../html/phasergame2.html")
@@ -171,7 +182,7 @@ function recibirDano(x, player, cientifico){
 	jugador.genetica -= x;
 	player.setPosition(player.x + 35*(player.x - cientifico.x)/Math.abs(player.x - cientifico.x), player.y);
 
-	numGenetica.setText(jugador.genetica);
+
 	
 	if(jugador.genetica<=0){
 	  //aqui deberias vovler a la posicion inicial, perdiendo una vida y rellenando la barra de genetica
@@ -179,7 +190,7 @@ function recibirDano(x, player, cientifico){
 	  cientifico.setPosition(enemigo.initialPositionx, enemigo.initialPositiony)
 	  jugador.genetica=100;
 	  jugador.vidas--;
-	  numvidas.setText(jugador.vidas);
+
 	  
 	  
 	  
@@ -221,12 +232,116 @@ class HUD extends Phaser.Scene {
        this.hudder2.scale = 0.30;
        this.hudizq =  this.add.image(945, 790, 'hud_side2')
        this.hudizq.scale = 0.30;
-	   P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-
-
+	   
+	   numvidas = this.add.text (150, 100, jugador.vidas,  {fill: '#0f0' });
+	   numvidas.setScrollFactor(0,0);
+	   numGenetica = this.add.text (150, 200, jugador.genetica,  {fill: '#0f0' });
+	   numGenetica.setScrollFactor(0,0);
+	   numPotis = this.add.text (150, 300, jugador.pociones,  {fill: '#0f0' });
+	   numPotis.setScrollFactor(0,0);
     }
+
+	update(){
+		numPotis.setText(jugador.pociones);
+		numvidas.setText(jugador.vidas);
+		numGenetica.setText(jugador.genetica);
+	}
    
 }
 
 
+class Pause extends Phaser.Scene {
+    constructor (){
+        super('Pause');
+    }
 
+	preload(){
+
+        this.load.image('exit', '../../resources/exit.png')
+        this.load.image('resume', '../../resources/resume_game.png')
+        this.load.image('prota', '../../resources/conejo.png')
+        this.load.image('prota2', '../../resources/cerdo.png')
+        this.load.image('prota3', '../../resources/raton.png')
+        this.load.image('malo1', '../../resources/cientifico.png')
+        this.load.image('malo2', '../../resources/potimala.png')
+       
+    }
+
+    create(){
+
+		P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+        
+        let resumeButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.30, 'resume')
+        let exitButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'exit')
+        exitButton.scale = 0.45
+        this.sprota = this.add.sprite(650, 290, 'prota')
+        this.sprota.scale = 0.5
+        this.sprota.setVisible(false);
+        this.sprota2 = this.add.sprite(800, 700, 'prota2')
+        this.sprota2.scale = 0.5
+        this.sprota2.setVisible(false);
+        this.sprota3 = this.add.sprite(1300, 450, 'prota3')
+        this.sprota3.scale = 0.5
+        this.sprota3.setVisible(false);
+
+        this.malo1 = this.add.sprite(650, 400, 'malo1')
+        this.malo1.scale = 0.3
+        this.sprota3.setVisible(false);
+        this.malo2 = this.add.sprite(960, 750, 'malo2')
+        this.malo2.scale = 0.4
+        this.sprota3.setVisible(false);
+
+
+
+
+
+        resumeButton.setInteractive();
+        resumeButton.on("pointerover", ()=>{ //raton por encima
+            this.sprota.setVisible(true);
+            this.sprota2.setVisible(true);
+            this.sprota3.setVisible(true);
+        })
+
+        resumeButton.on("pointerout", ()=>{ //puntero sale del boton
+            this.sprota.setVisible(false);
+            this.sprota2.setVisible(false);
+            this.sprota3.setVisible(false);
+        })
+
+        resumeButton.on("pointerup", ()=>{ //click
+          //aqui iría la redirección al juego
+          //loadpage("../scene3/game.js");  -> esta redirección no la pilla la muy zorra de los cojones
+        })
+
+
+
+        exitButton.setInteractive();
+        exitButton.on("pointerover", ()=>{ // poner y quitar sprites decorativos sin prisa
+            this.malo1.setVisible(true);
+            this.malo2.setVisible(true);
+           
+        })
+
+        exitButton.on("pointerout", ()=>{ //
+            this.malo1.setVisible(false);
+            this.malo2.setVisible(false);
+            
+        })
+
+        exitButton.on("pointerup", ()=>{ //click
+         loadpage("../../index.html");  
+        })
+
+
+
+    }
+
+	update(){
+		if (P.isDown){
+            this.scene.resume('GameScene');
+			this.scene.pause();
+			
+		}
+	}
+   
+}

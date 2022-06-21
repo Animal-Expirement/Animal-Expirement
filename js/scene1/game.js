@@ -133,8 +133,8 @@ class GameScene extends Phaser.Scene {
 		
 
 		if (P.isDown){
-			this.scene.pause();
-			this.scene.launch('sceneB');
+			this.physics.pause();
+			this.scene.launch('Pause');
 			
 		}
 	}
@@ -145,9 +145,9 @@ class GameScene extends Phaser.Scene {
 
 
 
-class sceneB extends Phaser.Scene {
+class Pause extends Phaser.Scene {
     constructor (){
-        super('sceneB');
+        super('Pause');
     }
 
     create(){
@@ -158,7 +158,7 @@ class sceneB extends Phaser.Scene {
 	update(){
 		if (P.isDown){
             this.scene.resume('GameScene');
-			this.scene.pause();
+			this.physics.pause();
 			
 		}
 	}

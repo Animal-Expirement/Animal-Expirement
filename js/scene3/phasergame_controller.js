@@ -2,7 +2,7 @@ var config = {
 	type: Phaser.AUTO,
 	width: 1920,
 	height: 1080,
-	scene: [Game, HUD],
+	scene: [Game, HUD, Pause],
 	//definicion del sistema de fisicas
 	physics: {
 	  default: 'arcade',
