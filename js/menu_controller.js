@@ -7,7 +7,7 @@ function phaser_game(){
 	
 }
 function puntuaciones(){
-	loadpage("../html/puntuacions.html");
+	loadpage("../Animal-Expirement/html/puntuacions.html");
 }
 
 function exit (){
@@ -15,11 +15,11 @@ function exit (){
 		alert("Leaving " + name + "'s game");
 	}
 	name = "";
-	loadpage("../index.html")
+	loadpage("../Animal-Expirement/index.html")
 }
 
 function options(){
-	loadpage("../html/option.html");
+	loadpage("../Animal-Expirement/html/option.html");
 }
 
 function load(){
