@@ -20,7 +20,7 @@ function exit (){
 }
 
 function hud (){
-	loadpage("./html/hud.html");
+	loadpage("./html/hud2.html");
 }
 
 function options(){
