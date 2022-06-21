@@ -54,11 +54,11 @@ class Game extends Phaser.Scene {
 
 
         exitButton.setInteractive();
-        exitButton.on("pointerover", ()=>{ //raton por encima
+        exitButton.on("pointerover", ()=>{ // poner y quitar sprites decorativos sin prisa
             console.log("ad")
         })
 
-        exitButton.on("pointerout", ()=>{ //puntero sale del boton
+        exitButton.on("pointerout", ()=>{ //
             console.log("aaaa")
         })
 
