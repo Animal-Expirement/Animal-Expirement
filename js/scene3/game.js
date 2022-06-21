@@ -166,7 +166,7 @@ function recoger(object){
 	jugador.pociones++;
 	
 	object.destroy();
-	if(jugador.pociones>=10){
+	if(jugador.pociones>=3){
 	  	loadpage("../html/phasergame2.html")
 		this.Scene.stop();
 	}
