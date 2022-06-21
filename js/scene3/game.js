@@ -39,9 +39,14 @@ class Game extends Phaser.Scene {
 		this.load.image('pocionBuena', '../resources/potiBuena.png');
 		this.load.image('pocionMala', '../resources/potiMala.png');
 		this.load.image('conejo_vidas', '../resources/conejo_vidas.png');
+		this.load.image('llave', '../resources/llave.png');
 	}
 	
     create() {
+
+
+		this.add.image(1280, 360, 'background');
+
 		this.add.image(1280, 360, 'background');
 
 		this.vidas = this.add.image(90, 100, 'conejo_vidas');

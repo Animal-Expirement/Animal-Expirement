@@ -28,6 +28,7 @@ let firingEnemyDelay = 4600;
 
 let aliveEnemies = []
 
+let llave;
 
 
 
@@ -49,11 +50,16 @@ class Game extends Phaser.Scene {
 		this.load.image('conejo_vidas', '../resources/cerdo_vidas.png');
 		this.load.image('queso', '../resources/quesito.png');
 		this.load.image('quesoMalo', '../resources/quesitoMalo.png');
+		this.load.image('llave', '../resources/llave.png');
 	}
 	
     create() {
+
+		
+
 		this.add.image(1280, 360, 'background');
 
+		
 		this.vidas = this.add.image(90, 100, 'conejo_vidas');
 		this.vidas.scale = 0.5;
       	this.vidas.setScrollFactor(0,0);

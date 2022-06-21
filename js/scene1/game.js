@@ -1,8 +1,15 @@
 let platforms
 let platformsMoving
 let platformsMoving2
+let platformsMoving3
+let platformsMoving4
+let platformsMoving5
+let platformsMoving6
+let platformsMoving7
+
 let player
 let cursors
+let llave
 
 class GameScene extends Phaser.Scene {
     constructor (){
@@ -19,13 +26,17 @@ class GameScene extends Phaser.Scene {
 		this.load.image('quesoMalo', '../resources/quesitoMalo.png');
 		this.load.image('background', '../resources/fondo3.png');
 		this.load.image('platform', '../resources/plataforma.png');
+		this.load.image('llave', '../resources/llave.png');
 	}
 	
     create (){	
-		this.add.image(960, 540, 'background');
+		this.add.image(960, 540, 'background').setScrollFactor(0,0);
 
+		llave = this.physics.add.image(450, -700, 'llave');
+		llave.body.allowGravity = false;
 
 		player = this.physics.add.sprite(450, 450, 'player');
+
 		player.setBounce(0.0);
 		player.setScale(0.5);
 		//estoo no porque quiero que tire pa arriba
@@ -37,8 +48,13 @@ class GameScene extends Phaser.Scene {
 		platforms.create(1200, 700, 'platform').refreshBody();
 
 		//CAMBIAR ESTO, crear grupo
-		platformsMoving = this.physics.add.image(800, 450, 'platform');
-		platformsMoving2 = this.physics.add.image(1200, 300, 'platform');
+		platformsMoving = this.physics.add.image(800, 550, 'platform');
+		platformsMoving2 = this.physics.add.image(1200, 350, 'platform');
+		platformsMoving3 = this.physics.add.image(1600, 150, 'platform');
+		platformsMoving4 = this.physics.add.image(800, -50, 'platform');
+		platformsMoving5 = this.physics.add.image(1200, -250, 'platform');
+		platformsMoving6 = this.physics.add.image(800, -450, 'platform');
+		platformsMoving7 = this.physics.add.image(400, -650, 'platform');
 	
 		platformsMoving.setImmovable(true);
 		platformsMoving.body.allowGravity = false;
@@ -46,13 +62,41 @@ class GameScene extends Phaser.Scene {
 		platformsMoving2.setImmovable(true);
 		platformsMoving2.body.allowGravity = false;
 		platformsMoving2.setVelocityX(50);
+		platformsMoving3.body.allowGravity = false;
+		platformsMoving3.setVelocityX(-50);
+		platformsMoving3.setImmovable(true);
+		platformsMoving4.body.allowGravity = false;
+		platformsMoving4.setVelocityX(50);
+		platformsMoving4.setImmovable(true);
+		platformsMoving5.body.allowGravity = false;
+		platformsMoving5.setVelocityX(50);
+		platformsMoving5.setImmovable(true);
+		platformsMoving6.body.allowGravity = false;
+		platformsMoving6.setVelocityX(50);
+		platformsMoving6.setImmovable(true);
+		platformsMoving7.body.allowGravity = false;
+		platformsMoving7.setVelocityX(50);
+		platformsMoving7.setImmovable(true);
 
 		this.physics.add.collider(player, platforms);
-		//CAMBIAR ESTO
 		this.physics.add.collider(player, platformsMoving);
 		this.physics.add.collider(player, platformsMoving2);
+		this.physics.add.collider(player, platformsMoving3);
+		this.physics.add.collider(player, platformsMoving5);
+		this.physics.add.collider(player, platformsMoving4);
+		this.physics.add.collider(player, platformsMoving6);
+		this.physics.add.collider(player, platformsMoving7);
 
 		cursors = this.input.keyboard.createCursorKeys();
+		
+
+		this.cameras.main.setBounds(0);
+		this.cameras.main.startFollow(player);
+
+		this.physics.add.collider(player, llave, function(obj1, obj2){
+			alert("ganaste");
+		});
+
 	}
 	
 	update (){
@@ -73,6 +117,11 @@ class GameScene extends Phaser.Scene {
     	{
         player.setVelocityY(420);
     	}
+
+		if(player.y>750){
+			alert("perdiste puto");
+		}
+
 
 
 	}
