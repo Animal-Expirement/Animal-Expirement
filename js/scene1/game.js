@@ -30,6 +30,7 @@ class GameScene extends Phaser.Scene {
 		this.load.image('background', '../resources/fondo3.png');
 		this.load.image('platform', '../resources/plataforma.png');
 		this.load.image('llave', '../resources/llave.png');
+		
 	}
 	
     create (){	
@@ -139,6 +140,11 @@ class GameScene extends Phaser.Scene {
 	}
 }
 
+
+
+
+
+
 class sceneB extends Phaser.Scene {
     constructor (){
         super('sceneB');
@@ -157,6 +163,7 @@ class sceneB extends Phaser.Scene {
 		}
 	}
 }
+
 
     
 

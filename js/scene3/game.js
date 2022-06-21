@@ -40,11 +40,11 @@ class Game extends Phaser.Scene {
 		this.load.image('pocionMala', '../resources/potiMala.png');
 		this.load.image('conejo_vidas', '../resources/conejo_vidas.png');
 		this.load.image('llave', '../resources/llave.png');
+		
 	}
 	
     create() {
-
-
+		this.scene.launch('HUD');
 		this.add.image(1280, 360, 'background');
 
 		this.add.image(1280, 360, 'background');
@@ -67,14 +67,8 @@ class Game extends Phaser.Scene {
 		numPotis = this.add.text (150, 300, jugador.pociones,  {fill: '#0f0' });
 		numPotis.setScrollFactor(0,0);
 
-
-		
-
-
 		this.cameras.main.setBounds(0,0, 2560, 720);
 		this.physics.world.setBounds(0, 0, 2560, 720)
-
-  
   
 		this.player = this.physics.add.image(0, 0, 'player');
 		this.player.setPosition(jugador.initialPositionx, jugador.initialPositiony)
@@ -83,13 +77,10 @@ class Game extends Phaser.Scene {
 		  this.player.setCollideWorldBounds(true);
 		this.player.setScale(0.5);
   
-  
 		this.cientifico = this.physics.add.image(enemigo.initialPositionx, enemigo.initialPositiony, 'cientifico').setImmovable();
 		this.cientifico.body.allowGravity = false;
 		this.cientifico.setCollideWorldBounds(true);
 		this.cientifico.setScale(0.3)
-  
-	   
   
 		potis = this.physics.add.group();
 		spawnPoti();
@@ -207,6 +198,34 @@ function spawnPoti(){
 	var poti = potis.create(x, y, 'pocionBuena');
 	poti.setScale(0.25);
 	poti.body.allowGravity = false;
+}
+
+class HUD extends Phaser.Scene {
+    constructor (){
+        super('HUD');
+    }
+
+    preload(){
+        this.load.image('hud_side1', '../resources/hud_images/hud_side1.png');
+        this.load.image('hud_side2', '../resources/hud_images/hud_side2.png');
+        this.load.image('hud_side3', '../resources/hud_images/hud_side3.png');
+		this.load.image('hud_pj', '../resources/hud_images/hud_pj.png');
+    }
+
+    create(){
+       this.hudcentro =  this.add.image(120, 700, 'hud_pj');
+       this.hudcentro.scale = 0.30;
+       this.hudder =  this.add.image(375, 763, 'hud_side1')
+       this.hudder.scale = 0.30;
+       this.hudder2 =  this.add.image(655, 760, 'hud_side3')
+       this.hudder2.scale = 0.30;
+       this.hudizq =  this.add.image(945, 790, 'hud_side2')
+       this.hudizq.scale = 0.30;
+	   P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+
+
+    }
+   
 }
 
 
