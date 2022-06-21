@@ -1,13 +1,9 @@
-function loadpage(url){
-	window.location.assign(url);
-}
-
 function phaser_game(){
     
-    name = prompt("User name");
+    name= prompt("User name");
 	
 	sessionStorage.setItem("username", name);
-    loadpage("../html/phasergame.html");
+    loadpage("../html/phasergame3.html");
 	
 }
 function puntuaciones(){
