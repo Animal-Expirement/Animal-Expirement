@@ -263,7 +263,7 @@ class Pause extends Phaser.Scene {
         this.load.image('prota2', '/Animal-Expirement/resources/cerdo.png')
         this.load.image('prota3', '/Animal-Expirement/resources/raton.png')
         this.load.image('malo1', '/Animal-Expirement/resources/cientifico.png')
-        this.load.image('malo2', '/Animal-Expirement/resources/potimala.png')
+        this.load.image('malo2', '/Animal-Expirement/resources/potiMala.png')
        
     }
 
