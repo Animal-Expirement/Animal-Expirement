@@ -11,6 +11,9 @@ let player
 let cursors
 let llave
 
+var P
+
+
 class GameScene extends Phaser.Scene {
     constructor (){
         super('GameScene');
@@ -27,9 +30,13 @@ class GameScene extends Phaser.Scene {
 		this.load.image('background', '../resources/fondo3.png');
 		this.load.image('platform', '../resources/plataforma.png');
 		this.load.image('llave', '../resources/llave.png');
+		
 	}
 	
     create (){	
+
+		this.scene.launch('HUD');
+
 		this.add.image(960, 540, 'background').setScrollFactor(0,0);
 
 		llave = this.physics.add.image(450, -700, 'llave');
@@ -88,6 +95,7 @@ class GameScene extends Phaser.Scene {
 		this.physics.add.collider(player, platformsMoving7);
 
 		cursors = this.input.keyboard.createCursorKeys();
+		P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 		
 
 		this.cameras.main.setBounds(0);
@@ -97,9 +105,11 @@ class GameScene extends Phaser.Scene {
 			alert("ganaste");
 		});
 
+
 	}
 	
 	update (){
+
 		if(cursors.left.isDown){
 			player.setVelocityX(-500)
 		}
@@ -110,23 +120,65 @@ class GameScene extends Phaser.Scene {
 			player.setVelocityX(0)
 		}
 		if (cursors.up.isDown && player.body.touching.down)
-    	{
-        player.setVelocityY(-700);
-    	}
-    	if (cursors.down.isDown) 
-    	{
-        player.setVelocityY(420);
-    	}
-
-		if(player.y>750){
-			loadpage("../phasergame2.html");
-			alert("perdiste puto");
-			
+		{
+		player.setVelocityY(-700);
+		}
+		if (cursors.down.isDown) 
+		{
+		player.setVelocityY(420);
 		}
 
+		if(player.y>750){
+			alert("perdiste puto");
+		}
 
+		
 
-
+		if (P.isDown){
+			this.scene.pause();
+			this.scene.launch('Pause');
+			
+		}
 	}
 }
 
+
+
+
+
+class HUD extends Phaser.Scene {
+    constructor(){
+        super({key: 'HUD'});
+
+    }
+
+    preload(){
+        this.load.image('hud_side1', '../resources/hud_images/hud_side1.png');
+        this.load.image('hud_side2', '../resources/hud_images/hud_side2.png');
+        this.load.image('hud_side3', '../resources/hud_images/hud_side3.png');
+		this.load.image('hud_pj', '../resources/hud_images/hud_pj.png');
+    }
+
+    create(){
+       this.hudcentro =  this.add.image(120, 700, 'hud_pj');
+       this.hudcentro.scale = 0.30;
+       this.hudder =  this.add.image(375, 763, 'hud_side1')
+       this.hudder.scale = 0.30;
+       this.hudder2 =  this.add.image(655, 760, 'hud_side3')
+       this.hudder2.scale = 0.30;
+       this.hudizq =  this.add.image(945, 790, 'hud_side2')
+       this.hudizq.scale = 0.30;
+
+
+    }
+   
+}
+
+
+    
+
+class Pause extends Phaser.Scene {
+    constructor (){
+        super('Pause');
+    }
+}
