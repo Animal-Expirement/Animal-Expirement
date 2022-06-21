@@ -19,6 +19,10 @@ function exit (){
 	name = "";
 }
 
+function hud (){
+	loadpage("./html/hud.html");
+}
+
 function options(){
 	loadpage("./html/options.html");
 }
