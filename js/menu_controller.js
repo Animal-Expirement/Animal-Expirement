@@ -3,7 +3,7 @@ function phaser_game(){
     name= prompt("User name");
 	
 	sessionStorage.setItem("username", name);
-    loadpage(".././html/phasergame3.html");
+    loadpage("../Animal-Expirement/html/phasergame3.html");
 	
 }
 function puntuaciones(){
