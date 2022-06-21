@@ -197,8 +197,9 @@ function recibirDano(x, player, cientifico){
 	 
 	}
 	if(jugador.vidas<=0){
+		loadpage("../index.html")
 		alert("perdiste mamahuevo");
-		this.Scene.stop();
+		
 	  }
 }
 
