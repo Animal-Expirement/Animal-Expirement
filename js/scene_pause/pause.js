@@ -11,6 +11,8 @@ class Game extends Phaser.Scene {
         this.load.image('prota', '../../resources/conejo.png')
         this.load.image('prota2', '../../resources/cerdo.png')
         this.load.image('prota3', '../../resources/raton.png')
+        this.load.image('malo1', '../../resources/cientifico.png')
+        this.load.image('malo2', '../../resources/potimala.png')
        
     }
 
@@ -27,6 +29,13 @@ class Game extends Phaser.Scene {
         this.sprota2.setVisible(false);
         this.sprota3 = this.add.sprite(1300, 450, 'prota3')
         this.sprota3.scale = 0.5
+        this.sprota3.setVisible(false);
+
+        this.malo1 = this.add.sprite(650, 400, 'malo1')
+        this.malo1.scale = 0.3
+        this.sprota3.setVisible(false);
+        this.malo2 = this.add.sprite(960, 750, 'malo2')
+        this.malo2.scale = 0.4
         this.sprota3.setVisible(false);
 
 
@@ -55,11 +64,15 @@ class Game extends Phaser.Scene {
 
         exitButton.setInteractive();
         exitButton.on("pointerover", ()=>{ // poner y quitar sprites decorativos sin prisa
-            console.log("ad")
+            this.malo1.setVisible(true);
+            this.malo2.setVisible(true);
+           
         })
 
         exitButton.on("pointerout", ()=>{ //
-            console.log("aaaa")
+            this.malo1.setVisible(false);
+            this.malo2.setVisible(false);
+            
         })
 
         exitButton.on("pointerup", ()=>{ //click
