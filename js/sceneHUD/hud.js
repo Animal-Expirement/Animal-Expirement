@@ -12,13 +12,13 @@ class Game extends Phaser.Scene {
     }
 
     create(){
-       this.hudcentro =  this.add.image(800, 700, 'hud_pj');
+       this.hudcentro =  this.add.image(120, 700, 'hud_pj');
        this.hudcentro.scale = 0.30;
-       this.hudder =  this.add.image(1060, 760, 'hud_side1')
+       this.hudder =  this.add.image(375, 763, 'hud_side1')
        this.hudder.scale = 0.30;
-       this.hudder2 =  this.add.image(1345, 760, 'hud_side3')
+       this.hudder2 =  this.add.image(655, 760, 'hud_side3')
        this.hudder2.scale = 0.30;
-       this.hudizq =  this.add.image(1630, 790, 'hud_side2')
+       this.hudizq =  this.add.image(945, 790, 'hud_side2')
        this.hudizq.scale = 0.30;
 
 
