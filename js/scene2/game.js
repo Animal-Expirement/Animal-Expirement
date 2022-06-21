@@ -30,9 +30,12 @@ let aliveEnemies = []
 
 let llave;
 
+let P;
+
 
 
 class Game extends Phaser.Scene {
+	
 
 	
 
@@ -54,6 +57,7 @@ class Game extends Phaser.Scene {
 	}
 	
     create() {
+		this.scene.launch('HUD');
 
 		
 
@@ -63,8 +67,8 @@ class Game extends Phaser.Scene {
 		this.vidas = this.add.image(90, 100, 'conejo_vidas');
 		this.vidas.scale = 0.5;
       	this.vidas.setScrollFactor(0,0);
-		numvidas = this.add.text (150, 100, jugador.vidas,  {fill: '#0f0' });
-		numvidas.setScrollFactor(0,0);
+		
+
 
 
 
@@ -90,14 +94,15 @@ class Game extends Phaser.Scene {
 		//timer = game.time.create(true);
 		this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
-		timeText = this.add.text(100, 400);
-		timeText.setScrollFactor(0,0);
+
 	  
 		enemies = this.physics.add.group();
 		createEnemy();
 		//this.physics.add.collider(this.player, enemies, function(){
 		//	alert("asdas")
 		//});
+
+		P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
 		
 		bullets = this.physics.add.group();
@@ -145,7 +150,13 @@ class Game extends Phaser.Scene {
 		}  
 
 
-		timeText.setText('Time: ' + (time*0.001).toFixed(2));
+		
+
+		if (P.isDown){
+			this.scene.pause();
+			this.scene.launch('Pause');
+			
+		}
 
 	}
 }
@@ -214,9 +225,49 @@ function disparar(x, y, time){
 function takeDmg(obj1, obj2){
 	obj2.destroy();
 	jugador.vidas-=1;
-	numvidas.setText(jugador.vidas);
+
 	if(jugador.vidas<=0){
 		alert("GAME OVER")
 		this.Scene.stop();
 	  }
+}
+
+
+
+class HUD extends Phaser.Scene {
+    constructor(){
+        super({key: 'HUD'});
+
+    }
+
+    preload(){
+        this.load.image('hud1', '../../resources/hud_images/scene2hud/hud_1.png')
+        this.load.image('hud2', '../../resources/hud_images/scene2hud/hud_2.png')
+    }
+
+    create(){
+		timeText = this.add.text(100, 400);
+		timeText.setScrollFactor(0,0);
+		numvidas = this.add.text (150, 100, jugador.vidas,  {fill: '#0f0' });
+		numvidas.setScrollFactor(0,0);
+        this.hudcentro =  this.add.image(1700, 800, 'hud1')
+        this.hudcentro.scale = 0.7;
+        this.hudder =  this.add.image(900, 800, 'hud2')
+       //this.hudder.scale = 0.30;
+
+
+    }
+
+	update(time){
+		numvidas.setText(jugador.vidas);
+		timeText.setText('Time: ' + (time*0.001).toFixed(2));
+	}
+   
+}
+
+
+class Pause extends Phaser.Scene {
+    constructor (){
+        super('Pause');
+    }
 }

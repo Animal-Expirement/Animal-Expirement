@@ -35,6 +35,8 @@ class GameScene extends Phaser.Scene {
 	
     create (){	
 
+		this.scene.launch('HUD');
+
 		this.add.image(960, 540, 'background').setScrollFactor(0,0);
 
 		llave = this.physics.add.image(450, -700, 'llave');
@@ -133,7 +135,7 @@ class GameScene extends Phaser.Scene {
 		
 
 		if (P.isDown){
-			this.physics.pause();
+			this.scene.pause();
 			this.scene.launch('Pause');
 			
 		}
@@ -144,26 +146,39 @@ class GameScene extends Phaser.Scene {
 
 
 
+class HUD extends Phaser.Scene {
+    constructor(){
+        super({key: 'HUD'});
 
-class Pause extends Phaser.Scene {
-    constructor (){
-        super('Pause');
+    }
+
+    preload(){
+        this.load.image('hud_side1', '../resources/hud_images/hud_side1.png');
+        this.load.image('hud_side2', '../resources/hud_images/hud_side2.png');
+        this.load.image('hud_side3', '../resources/hud_images/hud_side3.png');
+		this.load.image('hud_pj', '../resources/hud_images/hud_pj.png');
     }
 
     create(){
-       
-	   P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
-    }
+       this.hudcentro =  this.add.image(120, 700, 'hud_pj');
+       this.hudcentro.scale = 0.30;
+       this.hudder =  this.add.image(375, 763, 'hud_side1')
+       this.hudder.scale = 0.30;
+       this.hudder2 =  this.add.image(655, 760, 'hud_side3')
+       this.hudder2.scale = 0.30;
+       this.hudizq =  this.add.image(945, 790, 'hud_side2')
+       this.hudizq.scale = 0.30;
 
-	update(){
-		if (P.isDown){
-            this.scene.resume('GameScene');
-			this.physics.pause();
-			
-		}
-	}
+
+    }
+   
 }
 
 
     
 
+class Pause extends Phaser.Scene {
+    constructor (){
+        super('Pause');
+    }
+}
