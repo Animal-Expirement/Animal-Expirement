@@ -6,17 +6,48 @@ class Game extends Phaser.Scene {
 
     preload(){
 
-        this.load.image('exit', '../../resources/exit.png');
-        this.load.image('resume', '../../resources/resume_game.png');
+        this.load.image('exit', '../../resources/exit.png')
+        this.load.image('resume', '../../resources/resume_game.png')
+        this.load.image('prota', '../../resources/cientifico.png')
        
     }
 
     create(){
        
-        this.exitg = this.add.image(480, 480, 'exit' );
-        this.exit.scale = 0.1;
-        this.resumeg = this.add.image(1000, 480, 'resume');
-        this.resumeg.scale = 0.3;
+        let resumeButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.30, 'resume')
+        let exitButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'exit')
+        exitButton.scale = 0.45
+
+
+
+        resumeButton.setInteractive();
+        resumeButton.on("pointerover", ()=>{ //raton por encima
+            console.log("qw3eqwe")
+        })
+
+        resumeButton.on("pointerout", ()=>{ //puntero sale del boton
+            console.log("ASDASD")
+        })
+
+        resumeButton.on("pointerup", ()=>{ //click
+          //aqui iría la redirección al juego
+          //loadpage("../scene3/game.js");  -> esta redirección no la pilla la muy zorra de los cojones
+        })
+
+
+
+        exitButton.setInteractive();
+        exitButton.on("pointerover", ()=>{ //raton por encima
+            console.log("ad")
+        })
+
+        exitButton.on("pointerout", ()=>{ //puntero sale del boton
+            console.log("aaaa")
+        })
+
+        exitButton.on("pointerup", ()=>{ //click
+         loadpage("../../index.html");  
+        })
 
 
     }
