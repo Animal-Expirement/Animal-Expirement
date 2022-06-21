@@ -19,9 +19,14 @@ function exit (){
 	name = "";
 }
 
-function hud (){
+function hud2 (){
 	loadpage("./html/hud2.html");
 }
+
+function pause (){
+	loadpage("./html/pause.html");
+}
+
 
 function options(){
 	loadpage("./html/options.html");
