@@ -13,20 +13,25 @@ class Game extends Phaser.Scene {
     }
 
     create(){
-       
+        
         let resumeButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.30, 'resume')
         let exitButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, 'exit')
         exitButton.scale = 0.45
+        this.sprota = this.add.sprite(650, 290, 'prota')
+        this.sprota.scale = 0.3
+        this.sprota.setVisible(false);
+
+
 
 
 
         resumeButton.setInteractive();
         resumeButton.on("pointerover", ()=>{ //raton por encima
-            console.log("qw3eqwe")
+            this.sprota.setVisible(true);
         })
 
         resumeButton.on("pointerout", ()=>{ //puntero sale del boton
-            console.log("ASDASD")
+            this.sprota.setVisible(false);
         })
 
         resumeButton.on("pointerup", ()=>{ //click
