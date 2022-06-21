@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="./styles/main.css">
 		<script src="./js/loader.js"></script>
 		<script src="./js/game_info.js"></script>
-		<script src="./js/index.js"></script>
+		<script src="./js/menu_controller.js"></script>
 		<title> My first game - Menu </title>
 	</head>
 	<body>
@@ -12,23 +12,17 @@
 		<button class="menu-object" onclick="phaser_game()"> 
 			Phaser Game 
 		</button>
-		<button class="menu-object" onclick="phaser_game2()"> 
-			Phaser Game 2
-		</button>
-		<button class="menu-object" onclick="phaser_game3()"> 
-			Phaser Game 3
-		</button>
-		<button class="menu-object" onclick="puntuaciones()"> 
-			Puntuacions
+		<button class="menu-object" onclick="start_game()"> 
+			Start Game 
 		</button>
 		<button class="menu-object" onclick="load()"> 
-			Carregar 
+			Load Game 
 		</button>
 		<button class="menu-object" onclick="options()"> 
-			Opcions 
+			Options 
 		</button>
 		<button class="menu-object" onclick="exit()"> 
-			Sortir 
+			Exit 
 		</button>
 	</body>
 </html>

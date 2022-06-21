@@ -1,12 +1,8 @@
-//importamos el archivo del juego
-import { Game } from './game.js';
-
-const config = {
-    //canvas o webgl
+var config = {
   type: Phaser.AUTO,
-  width: 1280,
-  height: 720,
-  scene: [Game],
+  width: 1920,
+  height: 1080,
+  scene: [Game, HUD],
   //definicion del sistema de fisicas
   physics: {
     default: 'arcade',
@@ -17,5 +13,5 @@ const config = {
   }
 }
 
-//instanciamos juego con su configuracion
+
 var game = new Phaser.Game(config);
