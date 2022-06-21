@@ -153,10 +153,10 @@ class HUD extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image('hud_side1', '../resources/hud_images/hud_side1.png');
-        this.load.image('hud_side2', '../resources/hud_images/hud_side2.png');
-        this.load.image('hud_side3', '../resources/hud_images/hud_side3.png');
-		this.load.image('hud_pj', '../resources/hud_images/hud_pj.png');
+        this.load.image('hud_side1', '/Animal-Expirement/resources/hud_images/hud_side1.png');
+        this.load.image('hud_side2', '/Animal-Expirement/resources/hud_images/hud_side2.png');
+        this.load.image('hud_side3', '/Animal-Expirement/resources/hud_images/hud_side3.png');
+		this.load.image('hud_pj', '/Animal-Expirement./resources/hud_images/hud_pj.png');
     }
 
     create(){
