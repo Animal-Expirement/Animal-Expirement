@@ -23,5 +23,5 @@ function options(){
 }
 
 function load(){
-	loadpage("../html/load.html");
+	loadpage("../Animal-Expirement/html/load.html");
 }
