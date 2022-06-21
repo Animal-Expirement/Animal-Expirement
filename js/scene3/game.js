@@ -330,7 +330,7 @@ class Pause extends Phaser.Scene {
         })
 
         exitButton.on("pointerup", ()=>{ //click
-         loadpage("../../index.html");  
+         loadpage("../index.html");  
         })
 
 
