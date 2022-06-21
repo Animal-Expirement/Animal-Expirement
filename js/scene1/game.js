@@ -11,6 +11,9 @@ let player
 let cursors
 let llave
 
+var P
+
+
 class GameScene extends Phaser.Scene {
     constructor (){
         super('GameScene');
@@ -30,6 +33,7 @@ class GameScene extends Phaser.Scene {
 	}
 	
     create (){	
+
 		this.add.image(960, 540, 'background').setScrollFactor(0,0);
 
 		llave = this.physics.add.image(450, -700, 'llave');
@@ -88,6 +92,7 @@ class GameScene extends Phaser.Scene {
 		this.physics.add.collider(player, platformsMoving7);
 
 		cursors = this.input.keyboard.createCursorKeys();
+		P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 		
 
 		this.cameras.main.setBounds(0);
@@ -97,9 +102,11 @@ class GameScene extends Phaser.Scene {
 			alert("ganaste");
 		});
 
+
 	}
 	
 	update (){
+
 		if(cursors.left.isDown){
 			player.setVelocityX(-500)
 		}
@@ -110,20 +117,46 @@ class GameScene extends Phaser.Scene {
 			player.setVelocityX(0)
 		}
 		if (cursors.up.isDown && player.body.touching.down)
-    	{
-        player.setVelocityY(-700);
-    	}
-    	if (cursors.down.isDown) 
-    	{
-        player.setVelocityY(420);
-    	}
+		{
+		player.setVelocityY(-700);
+		}
+		if (cursors.down.isDown) 
+		{
+		player.setVelocityY(420);
+		}
 
 		if(player.y>750){
 			alert("perdiste puto");
 		}
 
+		
 
-
+		if (P.isDown){
+			this.scene.pause();
+			this.scene.launch('sceneB');
+			
+		}
 	}
 }
+
+class sceneB extends Phaser.Scene {
+    constructor (){
+        super('sceneB');
+    }
+
+    create(){
+       
+	   P = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+    }
+
+	update(){
+		if (P.isDown){
+            this.scene.resume('GameScene');
+			this.scene.pause();
+			
+		}
+	}
+}
+
+    
 
